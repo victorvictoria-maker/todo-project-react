@@ -1,52 +1,33 @@
 import './App.css';
 import { useState } from 'react';
-import {Todo} from './Todo';
+import { Todo } from './Todo';
+
+
 
 function App() {
-
-  let [todoValue, setTodoValue] = useState("");
+  const [inputValue, setInputValue] = useState("");
   const [todos, setTodos] = useState([]);
 
-  const getTodo = (event) => {
-    setTodoValue(event.target.value);
+  const getInputValue =(event) => {
+    setInputValue(event.target.value);
   };
 
   const addTodo = () => {
-    const task = {
+    const newTodo = {
       id: todos.length === 0 ? 1 : todos[todos.length-1].id+1,
-      todo: todoValue,
+      todo: inputValue,
       completed: false
     };
-    setTodos([...todos, task]);
-    // alert('helo');
-    // setTodos("");
+    setTodos([...todos, newTodo]);
   };
 
   const deleteTodo = (id) => {
-    // const updatedTodoList = todos.filter((name) => {
-      // if(name === todo) {
-      //   return false;
-      // } else {
-      //   return true;
-      // }
-    // });
-    // setTodos(updatedTodoList);
+    const newTodo = todos.filter((todo) => {
+      return todo.id !== id;     
+    });
 
-    // console.log(id);
-    setTodos(todos.filter((name) => name.id !== id));
+    setTodos(newTodo);
   };
-
-  // const completeTodo = (id) => {
-  //   setTodos(todos.map((todo) => {
-  //     if(todo.id === id) {
-  //       return {...todo, completed: true};
-  //     } else {
-  //       return todo;
-  //     }
-  //   });
-  //   );
-  // };
-
 
   const completeTodo = (id) => {
     // console.log(id);
@@ -64,19 +45,20 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <div className='addTodo'>
-        <input onChange={getTodo} value={todoValue}/>
-        <button onClick={addTodo}>Add Todo</button>
+    <div className="wrapper">
+      <div className='input'>
+        <input onChange={getInputValue}/>
+        <button onClick={addTodo}>Add</button>
       </div>
       <div className='todoList'>
         {todos.map((todo, key) => {
           return <Todo 
+                  key={key} 
                   todoName={todo.todo} 
-                  todoId={todo.id} key={key} 
-                  completed={todo.completed}
-                  completeTodo={completeTodo}
+                  todoId={todo.id} 
                   deleteTodo={deleteTodo}
+                  completeTodo={completeTodo}
+                  completed={todo.completed}
                 />
         })}
       </div>
