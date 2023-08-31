@@ -7,18 +7,121 @@ body {
   min-height: 100vh;
   background-color: black;
   color: white;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .wrapper {
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0px 0px 10px rgba(228, 223, 218, 0.9);
+  max-height: 80vh;
+  overflow: auto;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
 }
 
 .input {
   background-color: purple;
-  height: 35px;
   width: 300px;
-  padding: 5px;
-  border-radius: 5px;
+  border-radius: 7px;
+}
+
+.input .createtodo {
+  height: 100%;
+  width: 65%;
+  color: white;
+  padding-left: 5%;
+  background-color: purple;
+  border: 1px solid purple;
+  outline: none;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+  font-size: 1.1em;
+}
+
+.input input::placeholder {
+  color: white;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.input .addbtn {
+  height: 39px;
+  width: 40px;
+  background-color: purple;
+  border: 3px solid purple;
+  border-left: 1px solid black;
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+  color: white;
+  width: 70px;
+  outline: none;
+  font-size: 1em;
+  text-transform: uppercase;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+  height: 39px;
+  background-color: purple;
+  border: 1px solid purple;
+  outline: none;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+  font-size: 1.1em;
+  text-decoration-color: black !important;
+  text-decoration-style: double !important;
+  text-decoration-thickness: 3px !important;
+}
+
+.checkbox {
+  margin-right: 10px;
+  position: relative;
+  top: 5px;
+}
+
+.todo {
+  font-size: 1.2em;
+  position: relative;
+  top: 5px;
+}
+
+.delete {
+  float: right;
+  width: 80px;
+  height: 39px;
+  background-color: purple;
+  border: 3px solid purple;
+  border-left: 1px solid black;
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+  font-size: 1.3em;
+  text-transform: uppercase;
+}
+
+.delete:hover {
+  background-color: black;
+  border: 1px solid black;
+  color: white;
+}
+
+.setNew {
+  border: 1px solid purple;
+  background-color: purple;
+  color: white;
+  height: 30px;
+  border-radius: 10px;
+  position: relative;
+  left: 100px;
 }

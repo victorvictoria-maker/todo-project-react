@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Todo } from './Todo';
 
 
@@ -7,6 +7,27 @@ import { Todo } from './Todo';
 function App() {
   const [inputValue, setInputValue] = useState("");
   const [todos, setTodos] = useState([]);
+  const [completedTodoAmount, setCompletedTodoAmount] = useState(0);
+  const [allCompleted, setAllCompleted] = useState(false);
+
+  let todoLength = todos.length;
+  
+  useEffect(() => {
+    if(todoLength > 0) {
+      const allCompleted = todos.every((todo) => {
+        return todo.completed === true;
+      });
+      
+      if(allCompleted) {
+        setAllCompleted(true);
+      } else {
+        setAllCompleted(false);
+      };
+    };
+    
+    setCompletedTodoAmount(todos.filter((todo) => todo.completed).length);
+
+  }, [todos]);
 
   const getInputValue =(event) => {
     setInputValue(event.target.value);
@@ -30,7 +51,6 @@ function App() {
   };
 
   const completeTodo = (id) => {
-    // console.log(id);
     setTodos(todos.map((todo) => {
       if(todo.id === id) {
         if(todo.completed === false) {
@@ -44,12 +64,25 @@ function App() {
     }));
   };
 
+  const setNewTodos = () => {
+    setTodos([]);
+    setAllCompleted(false);
+  };
+
   return (
     <div className="wrapper">
       <div className='input'>
-        <input onChange={getInputValue}/>
-        <button onClick={addTodo}>Add</button>
+        <input className='createtodo' onChange={getInputValue} placeholder='Create new todo...'/>
+        <button className='addbtn' onClick={addTodo}>Add</button>
       </div>
+
+      {todoLength > 0 && 
+        <div className='head'>
+          {allCompleted === true ? <p>All todo completed</p> : <p>{completedTodoAmount} completed</p>}
+          {todoLength > 1 ? <p>{todoLength} todos</p> : <p>{todoLength} todo</p>}
+        </div>
+      }
+      
       <div className='todoList'>
         {todos.map((todo, key) => {
           return <Todo 
@@ -62,6 +95,10 @@ function App() {
                 />
         })}
       </div>
+      
+      {allCompleted && 
+        <button className='setNew' onClick={setNewTodos}>Set new Todos</button>
+      }
     </div>
   );
 }
